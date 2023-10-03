@@ -21,7 +21,7 @@ namespace Matrix
 
         public void mover(Matrix matrix, int max)
         {
-            Character characterAux = null;
+            Character? characterAux = null;
             int x = (int)this.Ubicacion.X;
             int y = (int)this.Ubicacion.Y;
             //Genero 2 numeros random a donde se movera

@@ -7,24 +7,26 @@ using System.Threading.Tasks;
 
 namespace Matrix
 {
-    class main
+    class Simulation
 
     {
         private const int SIZEMATRIX = 15;
-        static void Main(string[] args)
+        static void Main()
         {
             int count = 0;
             Neo neo;
             Smith smith;
             smith = SmithFactory.createSmith(SIZEMATRIX);
             neo = NeoFactory.CreateNeo(SIZEMATRIX);
+            Utility.Dibujo();
+            Console.WriteLine("\n\nPresiona cualquier tecla para comenzar\n\n");
             Console.WriteLine(smith);
             Matrix matrix;
             matrix = MatrixFactory.createMatrix(SIZEMATRIX, smith, neo);
             Console.ReadKey();
-            while (count < 30)
+            while (count < 20 && (matrix.Cont > 0 || matrix.Cola.Count > 0))
             {
-                Utility.PrintMatrix(matrix.MatrixChar,smith);
+                Utility.PrintMatrix(matrix,smith);
                 Utility.MoveGeneric(matrix, SIZEMATRIX);
                 Console.WriteLine("Tiempo de simulacion: "+ count);
                 Console.WriteLine("Enemigos Restantes: "+ matrix.Cola.Count);
@@ -40,7 +42,7 @@ namespace Matrix
                 if (count % 5 == 0) {
                     neo.mover(matrix, SIZEMATRIX);
                     neo.CreateEnemy(matrix);
-                    Utility.PrintMatrix(matrix.MatrixChar, smith);
+                    Utility.PrintMatrix(matrix, smith);
                     smith.History.Clear();
                     Console.WriteLine("Tiempo de simulacion: "+ count);
                     Console.WriteLine("Enemigos Restantes: "+ matrix.Cola.Count);

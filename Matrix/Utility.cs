@@ -35,16 +35,20 @@ namespace Matrix
         /// Muestra la matriz en pantalla
         /// </summary>
         /// <param name="matrix"></param>
-        public static void PrintMatrix(Character[][] matrix,Smith smith)
+        public static void PrintMatrix(Matrix matrix,Smith smith)
         {
             bool color = false;
             int cont = 0;
-            for (int i = 0; i < matrix.Length; i++)
-            {
 
-                for (int j = 0; j < matrix[i].Length; j++)
+            Console.WriteLine("╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+            for (int i = 0; i < matrix.MatrixChar.Length; i++)
+            {
+                Console.Write("║");
+
+                for (int j = 0; j < matrix.MatrixChar[i].Length; j++)
                 {
-                    if (matrix[i][j] == null)
+
+                    if (matrix.MatrixChar[i][j] == null)
                     {
                         color = inHistory(smith,i,j);
                         if (color)
@@ -61,13 +65,13 @@ namespace Matrix
                         }
 
                     }
-                    else if (matrix[i][j] is Smith)
+                    else if (matrix.MatrixChar[i][j] is Smith)
                     {
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.Write("[S]\t");
                         Console.ResetColor();
                     }
-                    else if (matrix[i][j] is Neo)
+                    else if (matrix.MatrixChar[i][j] is Neo)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.Write("[N]\t");
@@ -75,18 +79,20 @@ namespace Matrix
                     }
                     else
                     {
-                        char ini = matrix[i][j].Name[0];
+                        char ini = matrix.MatrixChar[i][j].Name[0];
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write("[{0}]\t",ini);
                         Console.ResetColor();
                         cont++;
                     }
                 }
-                Console.WriteLine("\n\n");
+                Console.WriteLine("║");
             }
+            Console.WriteLine("╚═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
+          
             Console.WriteLine("\n\n");
             Console.WriteLine("Enemigos en el campo: "+cont);
-
+            matrix.Cont = cont;
         }
         /// <summary>
         /// Cambia la ubicacion de un personaje
@@ -114,6 +120,11 @@ namespace Matrix
                     }
                 }
             }
+        }
+
+        public static void Dibujo()
+        {
+            Console.WriteLine("███████████████████████████████████████████████████████████████████████████████████████████████████████\r\n█░░░░░░██████████░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░███░░░░░░░░░░█░░░░░░░░██░░░░░░░░█\r\n█░░▄▀░░░░░░░░░░░░░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀▄▀▄▀░░█░░▄▀▄▀░░██░░▄▀▄▀░░█\r\n█░░▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░░░░░▄▀░░█░░░░░░▄▀░░░░░░█░░▄▀░░░░░░░░▄▀░░███░░░░▄▀░░░░█░░░░▄▀░░██░░▄▀░░░░█\r\n█░░▄▀░░░░░░▄▀░░░░░░▄▀░░█░░▄▀░░██░░▄▀░░█████░░▄▀░░█████░░▄▀░░████░░▄▀░░█████░░▄▀░░█████░░▄▀▄▀░░▄▀▄▀░░███\r\n█░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░▄▀░░█████░░▄▀░░█████░░▄▀░░░░░░░░▄▀░░█████░░▄▀░░█████░░░░▄▀▄▀▄▀░░░░███\r\n█░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░█████░░▄▀▄▀▄▀▄▀▄▀▄▀░░█████░░▄▀░░███████░░▄▀▄▀▄▀░░█████\r\n█░░▄▀░░██░░░░░░██░░▄▀░░█░░▄▀░░░░░░▄▀░░█████░░▄▀░░█████░░▄▀░░░░░░▄▀░░░░█████░░▄▀░░█████░░░░▄▀▄▀▄▀░░░░███\r\n█░░▄▀░░██████████░░▄▀░░█░░▄▀░░██░░▄▀░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░███████░░▄▀░░█████░░▄▀▄▀░░▄▀▄▀░░███\r\n█░░▄▀░░██████████░░▄▀░░█░░▄▀░░██░░▄▀░░█████░░▄▀░░█████░░▄▀░░██░░▄▀░░░░░░█░░░░▄▀░░░░█░░░░▄▀░░██░░▄▀░░░░█\r\n█░░▄▀░░██████████░░▄▀░░█░░▄▀░░██░░▄▀░░█████░░▄▀░░█████░░▄▀░░██░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀▄▀░░██░░▄▀▄▀░░█\r\n█░░░░░░██████████░░░░░░█░░░░░░██░░░░░░█████░░░░░░█████░░░░░░██░░░░░░░░░░█░░░░░░░░░░█░░░░░░░░██░░░░░░░░█\r\n███████████████████████████████████████████████████████████████████████████████████████████████████████\r\n");
         }
     }
 }

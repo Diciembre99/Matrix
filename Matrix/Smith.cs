@@ -47,8 +47,7 @@ namespace Matrix
             else sX--;
             if (y > sY) sY++;
             else sY--;
-
-            if (sX >= 0 && sX < 15 && sY >= 0 && sY < 15)
+            try
             {
                 if (matrix.MatrixChar[sX][sY] is not Neo &&
                     matrix.MatrixChar[sX+1][sY] is not Neo)
@@ -61,12 +60,17 @@ namespace Matrix
                     this.Ubicacion.X = sX;
                     this.Ubicacion.Y = sY;
                     Utility.ChangeLocation(sX, sY, this);
-                    Utility.PrintMatrix(matrix.MatrixChar, this);
+                    Utility.PrintMatrix(matrix, this);
 
                     // Llamar a la función recursivamente con las nuevas coordenadas
                     MoveSmith(x, y, matrix);
                 }
+
             }
+            catch (IndexOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException) { }
+
+
 
         }
 
